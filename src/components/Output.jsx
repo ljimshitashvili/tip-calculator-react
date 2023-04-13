@@ -1,22 +1,40 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-function Output() {
+function Output({
+  tipPerson,
+  totalPerson,
+  bill,
+  percent,
+  people,
+  setbill,
+  setpeople,
+  setpercent,
+  settipPerson,
+  settotalPerson,
+}) {
+  const resetAll = () => {
+    settipPerson("0.00");
+    settotalPerson("0.00");
+    setbill("");
+    setpeople("");
+    setpercent("");
+  };
   return (
     <OutputContainer>
       <div className="per">
         <h2>
           Tip Amount <span>/ person</span>
         </h2>
-        <h3>4.27</h3>
+        <h3>${tipPerson}</h3>
       </div>
       <div className="total">
         <h2>
           Total <span>/ person</span>
         </h2>
-        <h3>4.27</h3>
+        <h3>${totalPerson}</h3>
       </div>
-      <button>RESET</button>
+      <button onClick={resetAll}>RESET</button>
     </OutputContainer>
   );
 }

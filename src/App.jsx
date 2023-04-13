@@ -5,14 +5,42 @@ import Input from "./components/Input";
 import Output from "./components/Output";
 
 function App() {
+  const [bill, setbill] = useState("");
+  const [people, setpeople] = useState("");
+  const [percent, setpercent] = useState("");
+  const [tipPerson, settipPerson] = useState("0.00");
+  const [totalPerson, settotalPerson] = useState("0.00");
+  console.log({ people });
+  console.log({ totalPerson });
+
   return (
     <Body>
       <Header>
         <img src={splitter} alt="logo" />
       </Header>
       <Main>
-        <Input />
-        <Output />
+        <Input
+          bill={bill}
+          people={people}
+          percent={percent}
+          setbill={setbill}
+          setpeople={setpeople}
+          setpercent={setpercent}
+          settipPerson={settipPerson}
+          settotalPerson={settotalPerson}
+        />
+        <Output
+          bill={bill}
+          people={people}
+          percent={percent}
+          tipPerson={tipPerson}
+          totalPerson={totalPerson}
+          setbill={setbill}
+          setpeople={setpeople}
+          setpercent={setpercent}
+          settipPerson={settipPerson}
+          settotalPerson={settotalPerson}
+        />
       </Main>
     </Body>
   );

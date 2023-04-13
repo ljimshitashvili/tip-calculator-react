@@ -1,30 +1,96 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import dollarSign from "/public/icon-dollar.svg";
 import personSign from "/public/icon-person.svg";
 
-function Input() {
+function Input({
+  bill,
+  percent,
+  people,
+  setbill,
+  setpeople,
+  setpercent,
+  settipPerson,
+  settotalPerson,
+}) {
+  useEffect(() => {
+    if (people !== 0 && people !== "") {
+      const calculatePercent = (bill * percent) / 100;
+      settipPerson(calculatePercent / people);
+      settotalPerson((calculatePercent + Number(bill)) / people);
+    }
+  }, [bill, people, percent]);
+
   return (
     <InputContainer>
       <div className="bill">
         <h1>Bill</h1>
-        <input type="number" id="bill" placeholder="0" />
+        <input
+          type="number"
+          id="bill"
+          placeholder="0"
+          onChange={(e) => setbill(e.target.value)}
+        />
         <img src={dollarSign} alt="currency icon" />
       </div>
       <div className="tip">
         <h1>Select Tip %</h1>
         <div className="buttonContainer">
-          <button>5%</button>
-          <button>10%</button>
-          <button>15%</button>
-          <button>25%</button>
-          <button>50%</button>
-          <input type="number" id="custom" placeholder="Custom" />
+          <button
+            onClick={() => {
+              setpercent("5");
+            }}
+          >
+            5%
+          </button>
+          <button
+            onClick={() => {
+              setpercent("10");
+            }}
+          >
+            10%
+          </button>
+          <button
+            onClick={() => {
+              setpercent("15");
+            }}
+          >
+            15%
+          </button>
+          <button
+            onClick={() => {
+              setpercent("25");
+            }}
+          >
+            25%
+          </button>
+          <button
+            onClick={() => {
+              setpercent("50");
+            }}
+          >
+            50%
+          </button>
+          <input
+            onChange={(e) => {
+              setpercent(e.target.value);
+            }}
+            type="number"
+            id="custom"
+            placeholder="Custom"
+          />
         </div>
       </div>
       <div className="people">
         <h1>Number of People</h1>
-        <input type="number" id="people" placeholder="0" />
+        <input
+          type="number"
+          id="people"
+          placeholder="0"
+          onInput={(e) => {
+            setpeople(e.target.value);
+          }}
+        />
         <img src={personSign} alt="person icon" />
       </div>
     </InputContainer>
