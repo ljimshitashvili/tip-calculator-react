@@ -30,6 +30,7 @@ function Input({
           type="number"
           id="bill"
           placeholder="0"
+          value={bill}
           onChange={(e) => {
             setbill(e.target.value);
             setbuttonColor("#26C2AE");
@@ -100,6 +101,7 @@ function Input({
           type="number"
           id="people"
           placeholder="0"
+          value={people}
           onInput={(e) => {
             setpeople(e.target.value);
             setbuttonColor("#26C2AE");
