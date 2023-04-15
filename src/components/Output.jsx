@@ -12,6 +12,8 @@ function Output({
   setpercent,
   settipPerson,
   settotalPerson,
+  buttonColor,
+  setbuttonColor,
 }) {
   const resetAll = () => {
     settipPerson("0.00");
@@ -19,27 +21,62 @@ function Output({
     setbill("");
     setpeople("");
     setpercent("");
+    setbuttonColor("#0D686D");
   };
+  console.log({ buttonColor });
   return (
     <OutputContainer>
       <div className="per">
         <h2>
           Tip Amount <span>/ person</span>
         </h2>
-        <h3>${tipPerson}</h3>
+        <h3>
+          $
+          {isNaN(tipPerson) || !isFinite(tipPerson)
+            ? "0.00"
+            : Number(tipPerson).toFixed(2)}
+        </h3>
       </div>
       <div className="total">
         <h2>
           Total <span>/ person</span>
         </h2>
-        <h3>${totalPerson}</h3>
+        <h3>
+          $
+          {isNaN(totalPerson) || !isFinite(totalPerson)
+            ? "0.00"
+            : Number(totalPerson).toFixed(2)}
+        </h3>
       </div>
-      <button onClick={resetAll}>RESET</button>
+      <ResetButton buttonColor={buttonColor} onClick={resetAll}>
+        RESET
+      </ResetButton>
     </OutputContainer>
   );
 }
 
 export default Output;
+
+const ResetButton = styled.button`
+  background: ${(props) => props.buttonColor};
+  border-radius: 5px;
+  width: 281px;
+  height: 48px;
+  border: none;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 30px;
+  color: #00474b;
+  cursor: pointer;
+
+  @media (min-width: 1024px) {
+    width: 100%;
+
+    :hover {
+      background: #9fe8df;
+    }
+  }
+`;
 
 const OutputContainer = styled.div`
   width: 100%;
@@ -82,15 +119,9 @@ const OutputContainer = styled.div`
     justify-content: space-between;
   }
 
-  button {
-    background: #26c2ae;
-    border-radius: 5px;
-    width: 281px;
-    height: 48px;
-    border: none;
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 30px;
-    color: #00474b;
-  }
+  @media (min-width: 1024px) {
+    max-width: 410px;
+    height: 360px;
+    justify-content: space-around;
+  } ;
 `;

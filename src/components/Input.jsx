@@ -12,6 +12,7 @@ function Input({
   setpercent,
   settipPerson,
   settotalPerson,
+  setbuttonColor,
 }) {
   useEffect(() => {
     if (people !== 0 && people !== "") {
@@ -29,7 +30,10 @@ function Input({
           type="number"
           id="bill"
           placeholder="0"
-          onChange={(e) => setbill(e.target.value)}
+          onChange={(e) => {
+            setbill(e.target.value);
+            setbuttonColor("#26C2AE");
+          }}
         />
         <img src={dollarSign} alt="currency icon" />
       </div>
@@ -39,12 +43,14 @@ function Input({
           <button
             onClick={() => {
               setpercent("5");
+              setbuttonColor("#26C2AE");
             }}
           >
             5%
           </button>
           <button
             onClick={() => {
+              setbuttonColor("#26C2AE");
               setpercent("10");
             }}
           >
@@ -52,6 +58,7 @@ function Input({
           </button>
           <button
             onClick={() => {
+              setbuttonColor("#26C2AE");
               setpercent("15");
             }}
           >
@@ -59,6 +66,7 @@ function Input({
           </button>
           <button
             onClick={() => {
+              setbuttonColor("#26C2AE");
               setpercent("25");
             }}
           >
@@ -66,6 +74,7 @@ function Input({
           </button>
           <button
             onClick={() => {
+              setbuttonColor("#26C2AE");
               setpercent("50");
             }}
           >
@@ -73,6 +82,7 @@ function Input({
           </button>
           <input
             onChange={(e) => {
+              setbuttonColor("#26C2AE");
               setpercent(e.target.value);
             }}
             type="number"
@@ -82,14 +92,19 @@ function Input({
         </div>
       </div>
       <div className="people">
-        <h1>Number of People</h1>
-        <input
+        <h1>
+          Number of People{" "}
+          <ErrorMessage people={people}>Can't be zero</ErrorMessage>
+        </h1>
+        <StyledInput
           type="number"
           id="people"
           placeholder="0"
           onInput={(e) => {
             setpeople(e.target.value);
+            setbuttonColor("#26C2AE");
           }}
+          people={people}
         />
         <img src={personSign} alt="person icon" />
       </div>
@@ -98,6 +113,15 @@ function Input({
 }
 
 export default Input;
+
+const ErrorMessage = styled.span`
+  color: #e17457;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: right;
+  display: ${(props) => (props.people === "0" ? "block" : "none")};
+`;
 
 const InputContainer = styled.div`
   width: 100%;
@@ -112,6 +136,15 @@ const InputContainer = styled.div`
     font-size: 16px;
     line-height: 24px;
     color: #5e7a7d;
+  }
+
+  .people {
+    h1 {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+    }
   }
 
   .bill,
@@ -134,6 +167,7 @@ const InputContainer = styled.div`
       line-height: 36px;
       text-align: right;
       color: #00474b;
+      cursor: pointer;
 
       ::placeholder {
         font-weight: 700;
@@ -141,6 +175,14 @@ const InputContainer = styled.div`
         line-height: 36px;
         text-align: right;
         color: #9ebbbd;
+      }
+
+      @media (min-width: 1024px) {
+        width: 100%;
+
+        :hover {
+          outline: 2px solid #26c2ae;
+        }
       }
     }
 
@@ -152,7 +194,7 @@ const InputContainer = styled.div`
   }
 
   .tip {
-    width: 100%;
+    width: 102%;
     display: flex;
     flex-direction: column;
     gap: 6px;
@@ -160,9 +202,13 @@ const InputContainer = styled.div`
       display: flex;
       flex-wrap: wrap;
       gap: 16.5px;
+      @media (min-width: 1024px) {
+        gap: 14px;
+        width: 100%;
+      }
 
       button {
-        background: #00474b;
+        background-color: #00474b;
         border-radius: 5px;
         width: 146px;
         height: 48px;
@@ -171,6 +217,16 @@ const InputContainer = styled.div`
         font-size: 24px;
         line-height: 36px;
         color: #ffffff;
+        cursor: pointer;
+
+        @media (min-width: 1024px) {
+          width: 117px;
+
+          :hover {
+            background: #9fe8df;
+            color: #00474b;
+          }
+        }
       }
 
       #custom {
@@ -185,6 +241,7 @@ const InputContainer = styled.div`
         font-size: 24px;
         line-height: 36px;
         color: #00474b;
+        cursor: pointer;
 
         ::placeholder {
           font-weight: 700;
@@ -193,7 +250,34 @@ const InputContainer = styled.div`
           text-align: right;
           color: #547878;
         }
+
+        @media (min-width: 1024px) {
+          width: 117px;
+          padding: 0;
+        }
       }
     }
   }
+
+  @media (min-width: 1024px) {
+    width: 100%;
+    width: 380px;
+    padding: 0;
+  }
+`;
+const StyledInput = styled.input`
+  background: #f3f9fa;
+  border-radius: 5px;
+  border: 0;
+  width: 311px;
+  height: 48px;
+  padding: 17px;
+  text-align: right;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 36px;
+  text-align: right;
+  color: #00474b;
+  cursor: pointer;
+  outline: ${(props) => (props.people === "0" ? "2px solid #e17457" : "none")};
 `;

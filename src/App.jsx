@@ -10,8 +10,7 @@ function App() {
   const [percent, setpercent] = useState("");
   const [tipPerson, settipPerson] = useState("0.00");
   const [totalPerson, settotalPerson] = useState("0.00");
-  console.log({ people });
-  console.log({ totalPerson });
+  const [buttonColor, setbuttonColor] = useState("#0D686D");
 
   return (
     <Body>
@@ -28,18 +27,22 @@ function App() {
           setpercent={setpercent}
           settipPerson={settipPerson}
           settotalPerson={settotalPerson}
+          buttonColor={buttonColor}
+          setbuttonColor={setbuttonColor}
         />
         <Output
           bill={bill}
           people={people}
           percent={percent}
           tipPerson={tipPerson}
+          buttonColor={buttonColor}
           totalPerson={totalPerson}
           setbill={setbill}
           setpeople={setpeople}
           setpercent={setpercent}
           settipPerson={settipPerson}
           settotalPerson={settotalPerson}
+          setbuttonColor={setbuttonColor}
         />
       </Main>
     </Body>
@@ -54,6 +57,10 @@ const Body = styled.div`
   background: #c5e4e7;
   display: flex;
   flex-direction: column;
+  @media (min-width: 1024px) {
+    align-items: center;
+    justify-content: center;
+  }
 `;
 
 const Header = styled.header`
@@ -62,6 +69,9 @@ const Header = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media (min-width: 1024px) {
+    height: 300px;
+  }
 `;
 
 const Main = styled.main`
@@ -72,4 +82,12 @@ const Main = styled.main`
   flex-direction: column;
   align-items: center;
   flex: 1;
+  @media (min-width: 1024px) {
+    width: 920px;
+    flex: unset;
+    border-radius: 25px;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 32px;
+  }
 `;
