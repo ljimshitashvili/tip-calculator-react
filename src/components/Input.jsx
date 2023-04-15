@@ -221,6 +221,10 @@ const InputContainer = styled.div`
         color: #ffffff;
         cursor: pointer;
 
+        :focus {
+          background-color: #26c2ae;
+        }
+
         @media (min-width: 1024px) {
           width: 117px;
 
